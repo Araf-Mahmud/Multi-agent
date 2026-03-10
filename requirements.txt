@@ -1,0 +1,9 @@
+fastapi==0.133.0
+uvicorn==0.41.0
+pydantic==2.12.5
+scalar_fastapi==1.6.2
+python-dotenv==1.2.1
+qdrant-client==1.11.0
+langchain
+langgraph
+langsmith
