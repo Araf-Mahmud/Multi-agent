@@ -5,6 +5,8 @@ from sqlalchemy.pool import StaticPool
 
 from app.core.config import Config
 
+from langchain_community.utilities.sql_database import SQLDatabase
+
 config = Config()
 
 def get_engine_chinook_db():
@@ -20,7 +22,11 @@ def get_engine_chinook_db():
           "sqlite://",
           creator = lambda : connection,
           poolclass = StaticPool,
-          conncection_args = {"check_same_thread": False}
+          connect_args = {"check_same_thread": False} 
      )
+
+engine = get_engine_chinook_db()
+
+db = SQLDatabase(engine)
 
 
