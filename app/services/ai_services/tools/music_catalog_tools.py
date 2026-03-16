@@ -3,9 +3,7 @@ import ast
 from langchain_core.tools import tool
 
 from app.db.sqlite3_client import db
-from app.core.config import Config
 
-llm = Config().get_oss_llm()
 
 @tool
 def get_albums_by_artist(artist: str):
@@ -118,5 +116,5 @@ def check_for_songs(song_title):
     
 music_tools = [get_albums_by_artist,get_tracks_by_artist,get_songs_by_genre,check_for_songs]
 
-llm.bind_tools(music_tools)
+
 
