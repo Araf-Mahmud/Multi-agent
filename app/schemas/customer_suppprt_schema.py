@@ -6,9 +6,10 @@ from langgraph.graph.message import AnyMessage, add_messages
 class Customer_Support_State(TypedDict):
     
     customer_id : int
+    invoice_id : int
     messages : Annotated[List[AnyMessage],add_messages]
     loaded_memory : str
-    remaining_steps : RemainingSteps
+    # remaining_steps : RemainingSteps
     
 
 

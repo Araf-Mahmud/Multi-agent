@@ -1,3 +1,5 @@
+import uuid
+
 from langgraph.prebuilt import ToolNode
 
 from langgraph.graph import START, StateGraph, END
@@ -12,6 +14,9 @@ from app.schemas.customer_suppprt_schema import Customer_Support_State
 from app.services.ai_services.tools.music_catalog_tools import music_tools
 
 graph = StateGraph(Customer_Support_State)
+
+thread_id = str(uuid.uuid4())
+config = {"configurable": {"thread_id": thread_id}}
 
 checkpointer = MemorySaver()
 in_memory_store = InMemoryStore()
@@ -74,7 +79,7 @@ def find_music(state : Customer_Support_State, config : RunnableConfig):
         
     prompt = generate_music_assistant_prompt(memory)
     
-    response = llm_with_music_tools.invoke(SystemMessage(prompt) + state["messages"])
+    response = llm_with_music_tools.invoke([SystemMessage(content=prompt)] + state["messages"])
     
     return { "messages" : response }
 
@@ -82,7 +87,7 @@ def should_continue(state : Customer_Support_State, config : RunnableConfig):
     
     last_message = state['messages'][-1]
     
-    if not last_message.tool_calls:
+    if not getattr(last_message, "tool_calls"):
         return "end"
     
     return "continue"
@@ -106,3 +111,10 @@ find_music_agent = graph.compile(
     checkpointer = checkpointer,
     store = in_memory_store
 )
+
+question = "I like the Rolling Stones. What songs do you recommend by them or by other artists that I might like?"
+
+results = find_music_agent.invoke({"messages": [HumanMessage(content=question)]}, config=config)
+
+for message in results['messages']:
+    message.pretty_print()
