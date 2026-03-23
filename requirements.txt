@@ -11,3 +11,4 @@ requests
 sqlalchemy
 langchain_community
 langchain_groq
+langgraph_supervisor
