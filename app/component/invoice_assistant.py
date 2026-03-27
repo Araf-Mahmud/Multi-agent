@@ -46,9 +46,9 @@ invoice_agent = create_agent(
     store = in_memory_store
 )
 
-question = "My customer id is 1. What was my most recent invoice, and who was the employee that helped me with it?"
+# question = "My customer id is 1. What was my most recent invoice, and who was the employee that helped me with it?"
 
-result = invoice_agent.invoke({"messages": [HumanMessage(content=question)]}, config=config)
+# result = invoice_agent.invoke({"messages": [HumanMessage(content=question)]}, config=config)
 
-for message in result["messages"]:
-    message.pretty_print()
+# for message in result["messages"]:
+#     message.pretty_print()

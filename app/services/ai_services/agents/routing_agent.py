@@ -8,7 +8,7 @@ from langgraph_supervisor import create_supervisor
 
 from app.services.ai_services.agents.invoice_agent import invoice_agent
 from app.services.ai_services.agents.music_agent import find_music_agent
-from app.schemas.customer_suppprt_schema import Customer_Support_State, Supervisor_Agent_State
+from app.schemas.customer_suppprt_schema import Supervisor_Agent_State
 from app.core.config import Config
 
 
@@ -45,13 +45,13 @@ supervisor_prebuilt = supervisor_prebuilt_workflow.compile(
     checkpointer = checkpointer
 )
 
-thread_id = uuid.uuid4()
+# thread_id = uuid.uuid4()
 
-question = "My customer ID is 1. How much was my most recent purchase? What albums do you have by U2?"
+# question = "My customer ID is 1. How much was my most recent purchase? What albums do you have by U2?"
 
-config = {"configurable": {"thread_id": thread_id}}
+# config = {"configurable": {"thread_id": thread_id}}
 
-result = supervisor_prebuilt.invoke({"messages": [HumanMessage(content=question)], "remaining_steps":10}, config=config)
+# result = supervisor_prebuilt.invoke({"messages": [HumanMessage(content=question)], "remaining_steps":10}, config=config)
 
-for message in result["messages"]:
-    message.pretty_print()
+# for message in result["messages"]:
+#     message.pretty_print()
