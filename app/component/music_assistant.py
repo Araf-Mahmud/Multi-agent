@@ -112,9 +112,9 @@ find_music_agent = graph.compile(
     store = in_memory_store
 )
 
-question = "I like the Rolling Stones. What songs do you recommend by them or by other artists that I might like?"
+# question = "I like the Rolling Stones. What songs do you recommend by them or by other artists that I might like?"
 
-results = find_music_agent.invoke({"messages": [HumanMessage(content=question)]}, config=config)
+# results = find_music_agent.invoke({"messages": [HumanMessage(content=question)]}, config=config)
 
-for message in results['messages']:
-    message.pretty_print()
+# for message in results['messages']:
+#     message.pretty_print()

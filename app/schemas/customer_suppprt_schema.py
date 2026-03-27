@@ -1,4 +1,4 @@
-from typing import Annotated, List
+from typing import Annotated, List, Optional
 from typing_extensions import TypedDict
 from langgraph.managed.is_last_step import RemainingSteps
 from pydantic import BaseModel, Field
@@ -21,8 +21,12 @@ class Supervisor_Agent_State(TypedDict):
     remaining_steps : RemainingSteps
 
 
+from pydantic import BaseModel, Field
+
 class UserInfo(BaseModel):
-    
-    customer_identifier : int = Field(description = "Unique Id or email or number for a each customer.")
-    
+    """Schema for parsing user-provided account information."""
+    customer_identifier: str = Field(
+        default="", 
+        description="Identifier (customer ID, email, or phone). Return empty string if not found."
+    )
 
